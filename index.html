@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,600;1,400&display=swap"
+    rel="stylesheet">
+  <title>Minhas despesas recorrentes</title>
+</head>
+<body>
+  <header class="top-container">
+    <div class="content container">
+      <img src="/src/images/finance.svg" alt="Logo minhas despesas recorrentes">
+      <h1>Despesas<br>Recorrentes</h1>
+    </div>
+  </header>
+ <main class="container">
+    <section id="balance">
+      <h2 class="light">Balanço</h2>
+      <div class="card">
+        <p>Entradas</p>
+        <h3>R$ 5.000,00</h3>
+      </div>
+      <div class="card">
+        <p>Saídas</p>
+        <h3>R$ 2.000,00</h3>
+      </div>
+      <div class="card total">
+        <p>Total</p>
+        <h3>R$ 3.000,00</h3>
+      </div>
+    </section>
+    <section id="transaction">
+      <h2>Faturas</h2>
+      <table id="data-table">
+        <thead>
+          <tr>
+            <th id="description">Descrição</th>
+            <th id="value">Valor</th>
+            <th id="date">Vencimento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="description">Luz</td>
+            <td class="expense">R$ 500,00</td>
+            <td class="date">23/01/2021</td>
+          </tr>
+          <tr>
+            <td class="description">Criação website</td>
+            <td class="income">R$ 5000,00</td>
+            <td class="date">24/01/2021</td>
+          </tr>
+          <tr>
+            <td class="description">Aluguel</td>
+            <td class="expense">R$ 1000,00</td>
+            <td class="date">26/01/2021</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+ </main>
+  <footer>
+    <nav>
+      <a href="https://github.com/grasielaGomes/todo-with-pomodoro" target="_blank" rel="noopener noreferrer">
+        <img src="src/images/github.svg" alt="Logo github" height="40px">
+      </a>
+      <a href="https://www.linkedin.com/in/grasisilva/" target="_blank" rel="noopener noreferrer">
+        <img src="src/images/linkedin.svg" alt="Logo linkedin" height="40px">
+      </a>
+    </nav>
+  </footer>
+  
+</body>
+</html>
