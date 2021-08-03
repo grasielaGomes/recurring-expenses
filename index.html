@@ -20,28 +20,42 @@
   </header>
  <main class="container">
     <section id="balance">
-      <h2 class="light">Balanço</h2>
+      <h2 class="sr-only">Balanço</h2>
       <div class="card">
-        <p>Entradas</p>
+        <p class="content">
+          <span>Entradas</span>
+          <img src="./src/images/income.svg" alt="Imagem de entradas">
+        </p>
         <h3>R$ 5.000,00</h3>
       </div>
       <div class="card">
-        <p>Saídas</p>
+        <p class="content">
+          <span>Saídas</span>
+          <img src="./src/images/expense.svg" alt="Imagem de saídas">
+        </p>
         <h3>R$ 2.000,00</h3>
       </div>
       <div class="card total">
-        <p>Total</p>
+        <p class="content">
+          <span>Total</span>
+          <img src="./src/images/total.svg" alt="Imagem de total">
+        </p>
         <h3>R$ 3.000,00</h3>
       </div>
     </section>
+    <section>
+      <a href="" class="button new">+ nova despesa</a>
+    </section>
     <section id="transaction">
-      <h2>Faturas</h2>
+      <h2 class="sr-only">Faturas</h2>
       <table id="data-table">
+        <caption class="sr-only">Lista de despesas</caption>
         <thead>
           <tr>
             <th id="description">Descrição</th>
             <th id="value">Valor</th>
             <th id="date">Vencimento</th>
+            <th id="delete"></th>
           </tr>
         </thead>
         <tbody>
@@ -49,21 +63,35 @@
             <td class="description">Luz</td>
             <td class="expense">R$ 500,00</td>
             <td class="date">23/01/2021</td>
+            <td>
+              <img src="./src/images/minus.svg" alt="Remover despesa">
+            </td>
           </tr>
           <tr>
             <td class="description">Criação website</td>
             <td class="income">R$ 5000,00</td>
             <td class="date">24/01/2021</td>
+            <td>
+              <img src="./src/images/minus.svg" alt="Remover despesa">
+            </td>
           </tr>
           <tr>
             <td class="description">Aluguel</td>
             <td class="expense">R$ 1000,00</td>
             <td class="date">26/01/2021</td>
+            <td>
+              <img src="./src/images/minus.svg" alt="Remover despesa">
+            </td>
           </tr>
         </tbody>
       </table>
     </section>
  </main>
+<div class="modal-overlay">
+  <div class="modal">
+    oi
+  </div>
+</div>
   <footer>
     <nav>
       <a href="https://github.com/grasielaGomes/todo-with-pomodoro" target="_blank" rel="noopener noreferrer">
@@ -74,6 +102,5 @@
       </a>
     </nav>
   </footer>
-  
 </body>
 </html>

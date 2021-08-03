@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 93.75%;
+}
+
 body {
   background-color: var(--primary-light);
   font-family: 'Poppins', sans-serif;
@@ -21,6 +25,7 @@ body {
   padding: 2rem 0 10rem 0;
   font-size: .8rem;
   line-height: 1.4rem;
+  margin-bottom: 3rem;
 }
 
 .top-container img {
@@ -38,7 +43,19 @@ body {
   margin: auto;
 }
 
-/*===== BALANCE =====*/
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/*===== TITLES =====*/
 
 h2 {
   margin-top: 3.2rem;
@@ -49,6 +66,26 @@ h2 {
 .light {
   color: var(--primary-light);
 }
+
+/*===== LINKS AND BUTTONS =====*/
+
+a {
+  text-decoration: none;
+  text-transform: capitalize;
+  color: #49AA26;
+  transition: color 1s;
+}
+
+a:hover {
+  color: #091022;
+}
+
+.button.new {
+  display: inline-block;
+  margin: .8rem 0;
+}
+
+/*===== BALANCE =====*/
 
 #balance {
   margin-top: -9rem;
@@ -67,6 +104,8 @@ h2 {
 
 .card p {
   font-size: .8rem;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .card.total {
@@ -76,15 +115,21 @@ h2 {
 
 /*===== TABLE =====*/
 
-#data-table {
+#transaction {
+  display: block;
   width: 100%;
+  overflow-x: auto;
+}
+
+#data-table {
+  width: 150%;
   border-spacing: 0 .5rem;
   line-height: 1.1rem;
 }
 
 table thead tr th:first-child, table tbody tr td:first-child {
   border-radius: .25rem 0 0 .25rem;
-  width: 50%;
+  width: 40%;
 }
 
 table thead tr th:last-child, table tbody tr td:last-child {
@@ -106,6 +151,7 @@ table tbody td {
 
 table tbody tr {
   opacity: .7;
+  transition: opacity 200ms;
 }
 
 table tbody tr:hover {
@@ -120,9 +166,59 @@ td.expense {
   color: #CC1C64;
 }
 
+td img {
+  height: 20px;
+}
+
+/*===== MODAL =====*/
+
+.modal-overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .7);
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.modal {
+  background-color: var(--primary-light);
+  padding: 2.4rem;
+  position: relative;
+  border-radius: .2rem;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
 /*===== FOOTER =====*/
 
 footer {
   text-align: center;
   padding: 4rem 0 2rem;
+}
+
+/*===== RESPONSIVE =====*/
+
+@media (min-width: 800px) {
+  html {
+    font-size: 87.5%;
+  }
+  #balance {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  table thead tr th:first-child, table tbody tr td:first-child {
+    width: 50%;
+  }
+  #data-table {
+    width: 100%;
+  }
 }
