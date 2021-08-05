@@ -47,7 +47,7 @@
       </div>
     </section>
     <section>
-      <a href="" class="button new">+ nova despesa</a>
+      <a href="" class="button new" onclick="Modal.open()">+ nova despesa</a>
     </section>
     <section id="transaction">
       <h2 class="sr-only">Faturas</h2>
@@ -109,7 +109,7 @@
             <input type="date" id="expense-date" name="expense-date" placeholder="dd/mm/aaaa">
           </div>
           <div class="input-group actions">
-            <a href="#" class="button cancel">Cancelar</a>
+            <a href="#" class="button cancel" onclick="Modal.close()">Cancelar</a>
             <button>Salvar</button>
           </div>
         </form>
