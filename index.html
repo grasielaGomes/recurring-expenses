@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,8 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,600;1,400&display=swap"
     rel="stylesheet">
+    <script src="./src/js/script.js" defer></script>
   <title>Minhas despesas recorrentes</title>
 </head>
+
 <body>
   <header class="top-container">
     <div class="content container">
@@ -18,7 +21,7 @@
       <h1>Despesas<br>Recorrentes</h1>
     </div>
   </header>
- <main class="container">
+  <main class="container">
     <section id="balance">
       <h2 class="sr-only">Balanço</h2>
       <div class="card">
@@ -86,12 +89,33 @@
         </tbody>
       </table>
     </section>
- </main>
-<div class="modal-overlay">
-  <div class="modal">
-    oi
+  </main>
+  <div class="modal-overlay active">
+    <div class="modal">
+      <div id="form">
+        <h2>Nova Despesa</h2>
+        <form action="">
+          <div class="input-group">
+            <label for="expense-description" class="sr-only">Nome da despesa</label>
+            <input type="text" id="expense-description" name="expense-name" placeholder="Despesa">
+          </div>
+          <div class="input-group">
+            <label for="expense-amount" class="sr-only">Valor da despesa</label>
+            <input type="number" id="expense-amount" name="expense-amount" step="0.01" placeholder="0,00">
+            <small class="help">Use vírgulas para casas decimais</small>
+          </div>
+          <div class="input-group">
+            <label for="expense-date" class="sr-only">Vencimento</label>
+            <input type="date" id="expense-date" name="expense-date" placeholder="dd/mm/aaaa">
+          </div>
+          <div class="input-group actions">
+            <a href="#" class="button cancel">Cancelar</a>
+            <button>Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
-</div>
   <footer>
     <nav>
       <a href="https://github.com/grasielaGomes/todo-with-pomodoro" target="_blank" rel="noopener noreferrer">
@@ -103,4 +127,5 @@
     </nav>
   </footer>
 </body>
+
 </html>

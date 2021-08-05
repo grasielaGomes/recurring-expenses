@@ -1,6 +1,8 @@
 :root {
   --primary-dark: #091022;
   --primary-light: #F1F4FF;
+  --custom-green: #49AA26;
+  --custom-pink: #CC1C64;
 }
 
 * {
@@ -10,7 +12,7 @@
 }
 
 html {
-  font-size: 93.75%;
+  font-size: 87.5%;
 }
 
 body {
@@ -58,8 +60,7 @@ body {
 /*===== TITLES =====*/
 
 h2 {
-  margin-top: 3.2rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
   font-weight: normal;
 }
 
@@ -72,8 +73,8 @@ h2 {
 a {
   text-decoration: none;
   text-transform: capitalize;
-  color: #49AA26;
-  transition: color 1s;
+  color: var(--custom-green);
+  transition: color 300ms;
 }
 
 a:hover {
@@ -83,6 +84,40 @@ a:hover {
 .button.new {
   display: inline-block;
   margin: .8rem 0;
+}
+
+button, .button.cancel {
+  width: 49%;
+  height: 50px;
+  border-radius: .25rem;
+}
+
+button {
+  border: none;
+  color: white;
+  background-color: var(--custom-green);
+  cursor: pointer;
+  transition: background-color 300ms;
+  font-size: 1.05rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+button:hover {
+  background-color: #79cd31;
+}
+
+.button.cancel {
+  color: var(--custom-pink);
+  border: 2px solid var(--custom-pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: .5;
+  transition: opacity 300ms;
+}
+
+.button.cancel:hover {
+  opacity: 1;
 }
 
 /*===== BALANCE =====*/
@@ -109,7 +144,7 @@ a:hover {
 }
 
 .card.total {
-  background-color: #49AA26;
+  background-color: var(--custom-green);
   color: var(--primary-light);
 }
 
@@ -159,11 +194,11 @@ table tbody tr:hover {
 }
 
 td.income {
-  color: #49AA26
+  color: var(--custom-green);
 }
 
 td.expense {
-  color: #CC1C64;
+  color: var(--custom-pink);
 }
 
 td img {
@@ -187,14 +222,39 @@ td img {
 
 .modal {
   background-color: var(--primary-light);
-  padding: 2.4rem;
+  padding: 3rem 4rem;
   position: relative;
   border-radius: .2rem;
+  width: 90%;
+  max-width: 600px;
 }
 
 .modal-overlay.active {
   opacity: 1;
   visibility: visible;
+}
+
+/*===== FORM =====*/
+
+input {
+  border: none;
+  border-radius: .2rem;
+  padding: 1.3rem 1rem;
+  width: 100%;
+}
+
+.input-group {
+  margin-top: 1rem;
+}
+
+.input-group small {
+  opacity: .4;
+}
+
+.input-group.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /*===== FOOTER =====*/
@@ -208,7 +268,7 @@ footer {
 
 @media (min-width: 800px) {
   html {
-    font-size: 87.5%;
+    font-size: 93.75%;
   }
   #balance {
     display: grid;
