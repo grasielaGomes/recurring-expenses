@@ -19,6 +19,8 @@ body {
   background-color: var(--primary-light);
   font-family: 'Poppins', sans-serif;
   color: var(--primary-dark);
+  position: relative;
+  min-height: 100vh;
 }
 
 .top-container {
@@ -261,7 +263,7 @@ input {
 
 footer {
   text-align: center;
-  padding: 4rem 0 2rem;
+  padding: 4rem 0 1rem 0;
 }
 
 /*===== RESPONSIVE =====*/
@@ -280,5 +282,11 @@ footer {
   }
   #data-table {
     width: 100%;
+  }
+  footer {
+    position: absolute;
+    bottom: 1rem;
+    width: 100%;
+    text-align: center;
   }
 }
