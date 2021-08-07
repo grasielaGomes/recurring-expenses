@@ -30,14 +30,35 @@ const Transaction = {
     return (this.incomes() || 0 ) - this.expenses();
   }
 }
+Transaction.expenses();
+
+const Utils = {
+  formatCurrency (value) {
+    let signal = "";
+    if(value < 0 ) signal = "-";
+    value = String(value).replace(/\D/g, "");
+    value = Number(value) / 100;
+    value = value.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    })
+    return signal + value;
+  }
+}
 
 const htmlCards = {
   cardTotal: document.querySelector('.total'),
   expense: document.getElementById('expense-display'),
   total: document.getElementById('total-display'),
+  changeValueVisibility() {
+    if(transactions.length === 0){
+      this.expense.classList.toggle('hidden');
+      this.total.classList.toggle('hidden');
+    }
+  },
   updateBalance(){
-    this.expense.innerText = Transaction.expenses();
-    this.total.innerText = Transaction.total();
+    this.expense.innerText = Utils.formatCurrency(Transaction.expenses());
+    this.total.innerText = Utils.formatCurrency(Transaction.total());
     Transaction.total() < 0 
       ? this.cardTotal.style.backgroundColor = 'var(--custom-pink)'
       : this.cardTotal.style.backgroundColor = 'var(--custom-green'
@@ -45,6 +66,8 @@ const htmlCards = {
 }
 
 htmlCards.updateBalance();
+htmlCards.changeValueVisibility();
+
 
 const htmlTableElement = {
   transactionsContainer: document.querySelector('#data-table tbody'),
@@ -66,15 +89,6 @@ const htmlTableElement = {
   }
 }
 
-const Utils = {
-  formatCurrency(value) {
-    value = String(value).replace(/\D/g, "");
-    value = Number(value) / 100;
-    return value.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL"
-    })
-  }
-}
+
 
 transactions.forEach(t => htmlTableElement.addTransaction(t));
