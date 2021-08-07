@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,600;1,400&display=swap"
     rel="stylesheet">
-    <script src="./src/js/script.js" defer></script>
+  <script src="./src/js/script.js" defer></script>
   <title>Minhas despesas recorrentes</title>
 </head>
 
@@ -26,24 +26,27 @@
       <h2 class="sr-only">Balanço</h2>
       <div class="card">
         <p class="content">
-          <span>Entradas</span>
+          <span>Total entradas</span>
           <img src="./src/images/income.svg" alt="Imagem de entradas">
         </p>
-        <h3>R$ 5.000,00</h3>
+        <div class="card-label">
+          <label for="income-display">R$</label>
+          <input id="income-display" type="text" pattern="\d*" maxlength="10" placeholder="0,00">
+        </div>
       </div>
       <div class="card">
         <p class="content">
-          <span>Saídas</span>
+          <span>Total saídas</span>
           <img src="./src/images/expense.svg" alt="Imagem de saídas">
         </p>
-        <h3>R$ 2.000,00</h3>
+        <h3 id="expense-display" class="">R$ 2.000,00</h3>
       </div>
       <div class="card total">
         <p class="content">
-          <span>Total</span>
+          <span>Balanço</span>
           <img src="./src/images/total.svg" alt="Imagem de total">
         </p>
-        <h3>R$ 3.000,00</h3>
+        <h3 id="total-display" class="">R$ 3.000,00</h3>
       </div>
     </section>
     <section>
@@ -74,15 +77,17 @@
           <div class="input-group">
             <label for="expense-description" class="sr-only">Nome da despesa</label>
             <input type="text" id="expense-description" name="expense-name" placeholder="Despesa">
+            <small class="help">Descrição da despesa</small>
           </div>
           <div class="input-group">
             <label for="expense-amount" class="sr-only">Valor da despesa</label>
             <input type="number" id="expense-amount" name="expense-amount" step="0.01" placeholder="0,00">
-            <small class="help">Use vírgulas para casas decimais</small>
+            <small class="help">Valor (use vírgulas para casas decimais)</small>
           </div>
           <div class="input-group">
             <label for="expense-date" class="sr-only">Vencimento</label>
             <input type="date" id="expense-date" name="expense-date" placeholder="dd/mm/aaaa">
+            <small class="help">Data do vencimento</small>
           </div>
           <div class="input-group actions">
             <a href="#" class="button cancel" onclick="Modal.activate()">Cancelar</a>

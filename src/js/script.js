@@ -21,27 +21,43 @@ const transactions = [
 
 const Transaction = {
   incomes() {
-    //pegar as entradas
+    return document.getElementById('income-display').value;
   },
   expenses() {
-    //somar as saidas
+    return transactions.reduce((acc, { amount }) => acc + amount, 0);
   },
   total() {
-    //entradas - saidas
+    return (this.incomes() || 0 ) - this.expenses();
   }
 }
 
-const htmlObj = {
-  transactionsContainer: document.querySelector('.data-table tbody'),
+const htmlCards = {
+  cardTotal: document.querySelector('.total'),
+  expense: document.getElementById('expense-display'),
+  total: document.getElementById('total-display'),
+  updateBalance(){
+    this.expense.innerText = Transaction.expenses();
+    this.total.innerText = Transaction.total();
+    Transaction.total() < 0 
+      ? this.cardTotal.style.backgroundColor = 'var(--custom-pink)'
+      : this.cardTotal.style.backgroundColor = 'var(--custom-green'
+  }
+}
+
+htmlCards.updateBalance();
+
+const htmlTableElement = {
+  transactionsContainer: document.querySelector('#data-table tbody'),
   addTransaction(transaction, index) {
     const tr = document.createElement('tr');
     tr.innerHTML = this.innerHTMLTransaction(transaction);
     this.transactionsContainer.appendChild(tr);
   },
   innerHTMLTransaction(transaction) {
+    const amount = Utils.formatCurrency(transaction.amount);
     return `
         <td class="description">${transaction.description}</td>
-        <td class="expense">${transaction.amount}</td>
+        <td class="expense">${amount}</td>
         <td class="date">${transaction.date}</td>
         <td>
           <img src="./src/images/minus.svg" alt="Remover despesa">
@@ -49,3 +65,16 @@ const htmlObj = {
     `
   }
 }
+
+const Utils = {
+  formatCurrency(value) {
+    value = String(value).replace(/\D/g, "");
+    value = Number(value) / 100;
+    return value.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    })
+  }
+}
+
+transactions.forEach(t => htmlTableElement.addTransaction(t));

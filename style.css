@@ -3,6 +3,7 @@
   --primary-light: #F1F4FF;
   --custom-green: #49AA26;
   --custom-pink: #CC1C64;
+  --custom-grey: #939aac;
 }
 
 * {
@@ -26,7 +27,7 @@ body {
 .top-container {
   background-color: var(--primary-dark);
   color: var(--primary-light);
-  padding: 2rem 0 10rem 0;
+  padding: 2rem 0 7rem 0;
   font-size: .8rem;
   line-height: 1.4rem;
   margin-bottom: 3rem;
@@ -75,12 +76,12 @@ h2 {
 a {
   text-decoration: none;
   text-transform: capitalize;
-  color: var(--custom-green);
+  color: var(--custom-pink);
   transition: color 300ms;
 }
 
 a:hover {
-  color: #091022;
+  color: var(--primary-dark);
 }
 
 .button.new {
@@ -97,7 +98,7 @@ button, .button.cancel {
 button {
   border: none;
   color: white;
-  background-color: var(--custom-green);
+  background-color: var(--custom-pink);
   cursor: pointer;
   transition: background-color 300ms;
   font-size: 1.05rem;
@@ -105,12 +106,12 @@ button {
 }
 
 button:hover {
-  background-color: #79cd31;
+  background-color: #ff0084;
 }
 
 .button.cancel {
-  color: var(--custom-pink);
-  border: 2px solid var(--custom-pink);
+  color: var(--primary-dark);
+  border: 2px solid var(--primary-dark);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,7 +126,7 @@ button:hover {
 /*===== BALANCE =====*/
 
 #balance {
-  margin-top: -9rem;
+  margin-top: -7rem;
 }
 
 .card {
@@ -135,8 +136,27 @@ button:hover {
   margin-bottom: 1rem;
 }
 
+.card input {
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  color: var(--primary-dark);
+}
+
+.card input, .card label {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.card input:focus {
+  outline: none;
+}
+
 .card h3 {
   font-size: 1.4rem;
+}
+
+.hidden {
+  display: none;
 }
 
 .card p {
@@ -174,11 +194,11 @@ table thead tr th:last-child, table tbody tr td:last-child {
 }
 
 table thead th {
-  background-color: white;
+  background-color: var(--custom-pink);
   font-weight: normal;
   padding: 1rem 2rem;
   text-align: left;
-  color: #939aac;
+  color: white;
 }
 
 table tbody td {
@@ -216,6 +236,7 @@ td img {
   position: fixed;
   top: 0;
   display: flex;
+  z-index: 1000;
   align-items: center;
   justify-content: center;
   opacity: 0;
@@ -238,7 +259,7 @@ td img {
 
 /*===== FORM =====*/
 
-input {
+.modal-overlay input {
   border: none;
   border-radius: .2rem;
   padding: 1.3rem 1rem;
@@ -271,6 +292,16 @@ footer {
 @media (min-width: 800px) {
   html {
     font-size: 93.75%;
+  }
+  .top-container {
+    padding: 3rem 0 8rem 0;
+  }
+  .card-label {
+    display: flex;
+    gap: 5px;
+  }
+  .card input {
+    max-width: 150px;
   }
   #balance {
     display: grid;
