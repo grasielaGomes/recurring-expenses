@@ -1,5 +1,5 @@
 const Modal = {
-  activate(){
+  activate () {
     document.querySelector('.modal-overlay').classList.toggle('active');
   }
 }
@@ -20,22 +20,35 @@ const transactions = [
 ];
 
 const Transaction = {
-  incomes() {
-    return document.getElementById('income-display').value;
+  all: transactions,
+  income: document
+    .getElementById('income-display'),
+  totalCard: document.querySelector('.total'),
+  getIncomeValue() {
+    Transaction.income.addEventListener('blur', function (e) {
+      let total = parseInt(e.target.value) - Transaction.expenses();
+      Transaction.income.value = Utils.formatCurrency(e.target.value);
+      document.getElementById('total-display').innerHTML = Utils.formatCurrency(total);
+      total < 0
+        ? Transaction.totalCard.style.backgroundColor = 'var(--custom-pink)'
+        : Transaction.totalCard.style.backgroundColor = 'var(--custom-green'
+    });
   },
   expenses() {
-    return transactions.reduce((acc, { amount }) => acc + amount, 0);
+    return this.all
+      .reduce((acc, { amount }) => acc + amount, 0);
   },
   total() {
-    return (this.incomes() || 0 ) - this.expenses();
+    return this.income.value - this.expenses();
   }
 }
-Transaction.expenses();
+
+Transaction.getIncomeValue();
 
 const Utils = {
   formatCurrency (value) {
     let signal = "";
-    if(value < 0 ) signal = "-";
+    if (value < 0) signal = "-";
     value = String(value).replace(/\D/g, "");
     value = Number(value) / 100;
     value = value.toLocaleString("pt-BR", {
@@ -50,16 +63,16 @@ const htmlCards = {
   cardTotal: document.querySelector('.total'),
   expense: document.getElementById('expense-display'),
   total: document.getElementById('total-display'),
-  changeValueVisibility() {
-    if(transactions.length === 0){
+  changeValueVisibility () {
+    if (transactions.length === 0) {
       this.expense.classList.toggle('hidden');
       this.total.classList.toggle('hidden');
     }
   },
-  updateBalance(){
+  updateBalance () {
     this.expense.innerText = Utils.formatCurrency(Transaction.expenses());
     this.total.innerText = Utils.formatCurrency(Transaction.total());
-    Transaction.total() < 0 
+    Transaction.total() < 0
       ? this.cardTotal.style.backgroundColor = 'var(--custom-pink)'
       : this.cardTotal.style.backgroundColor = 'var(--custom-green'
   }
@@ -71,12 +84,12 @@ htmlCards.changeValueVisibility();
 
 const htmlTableElement = {
   transactionsContainer: document.querySelector('#data-table tbody'),
-  addTransaction(transaction, index) {
+  addTransaction (transaction, index) {
     const tr = document.createElement('tr');
     tr.innerHTML = this.innerHTMLTransaction(transaction);
     this.transactionsContainer.appendChild(tr);
   },
-  innerHTMLTransaction(transaction) {
+  innerHTMLTransaction (transaction) {
     const amount = Utils.formatCurrency(transaction.amount);
     return `
         <td class="description">${transaction.description}</td>

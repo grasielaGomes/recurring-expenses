@@ -139,11 +139,8 @@ button:hover {
 .card input {
   border: none;
   font-family: 'Poppins', sans-serif;
-  color: var(--primary-dark);
-}
-
-.card input, .card label {
-  font-size: 1.3rem;
+  color: var(--custom-green);
+  font-size: 1.4rem;
   font-weight: bold;
 }
 
@@ -295,10 +292,6 @@ footer {
   }
   .top-container {
     padding: 3rem 0 8rem 0;
-  }
-  .card-label {
-    display: flex;
-    gap: 5px;
   }
   .card input {
     max-width: 150px;
