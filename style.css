@@ -20,8 +20,8 @@ body {
   background-color: var(--primary-light);
   font-family: 'Poppins', sans-serif;
   color: var(--primary-dark);
-  position: relative;
-  min-height: 100vh;
+  /* position: relative;
+  min-height: 100vh; */
 }
 
 .top-container {
@@ -212,10 +212,6 @@ table tbody tr:hover {
   opacity: 1;
 }
 
-td.income {
-  color: var(--custom-green);
-}
-
 td.expense {
   color: var(--custom-pink);
 }
@@ -269,6 +265,11 @@ td img {
 
 .input-group small {
   opacity: .4;
+}
+
+.modal p {
+  color: var(--custom-pink);
+  margin-top: 1rem;
 }
 
 .input-group.actions {

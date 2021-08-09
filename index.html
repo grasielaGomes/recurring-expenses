@@ -37,14 +37,14 @@
           <span>Total saídas</span>
           <img src="./src/images/expense.svg" alt="Imagem de saídas">
         </p>
-        <h3 id="expense-display" class="">R$ 2.000,00</h3>
+        <h3 id="expense-display" class="hidden">R$ 0,00</h3>
       </div>
       <div class="card total">
         <p class="content">
           <span>Balanço</span>
           <img src="./src/images/total.svg" alt="Imagem de total">
         </p>
-        <h3 id="total-display" class="">R$ 3.000,00</h3>
+        <h3 id="total-display" class="hidden">R$ 0,00</h3>
       </div>
     </section>
     <section>
@@ -79,7 +79,7 @@
           </div>
           <div class="input-group">
             <label for="expense-amount" class="sr-only">Valor da despesa</label>
-            <input type="number" id="expense-amount" name="expense-amount" step="0.01" placeholder="0,00">
+            <input type="text" id="expense-amount" name="expense-amount" placeholder="0,00" maxlength="10">
             <small class="help">Valor (use vírgulas para casas decimais)</small>
           </div>
           <div class="input-group">
@@ -87,6 +87,7 @@
             <input type="date" id="expense-date" name="expense-date" placeholder="dd/mm/aaaa">
             <small class="help">Data do vencimento</small>
           </div>
+          <p class="hidden" id="form-error">Error message</p>
           <div class="input-group actions">
             <a href="#" class="button cancel" onclick="Modal.activate()">Cancelar</a>
             <button>Salvar</button>
