@@ -4,26 +4,39 @@ const Modal = {
   }
 }
 
+const Storage = {
+  getIncomes () {
+    return localStorage.getItem("recurringExpenses:incomes") || '';
+  },
+  setIncomes (incomes) {
+    localStorage.setItem("recurringExpenses:incomes", incomes);
+  },
+  getTransactions () {
+    return JSON.parse(localStorage.getItem("recurringExpenses:transactions")) || [];
+  },
+  setTransactions (transactions) {
+    localStorage.setItem("recurringExpenses:transactions", JSON.stringify(transactions));
+  }
+}
+
 const Transaction = {
-  all: [
-  ],
-  add(transaction) {
+  all: Storage.getTransactions(),
+  add (transaction) {
     this.all.push(transaction);
     Add.reload();
   },
-  remove(index){
+  remove (index) {
     this.all.splice(index, 1);
     Add.reload();
   },
-  income() {
-    return document
-    .getElementById('income-display').value; 
+  income () {
+    return document.getElementById('income-display').value;
   },
-  expenses() {
+  expenses () {
     return this.all
       .reduce((acc, { amount }) => acc + amount, 0);
   },
-  total() {
+  total () {
     return Utils.formatAmount(this.income()) - this.expenses();
   }
 }
@@ -33,36 +46,43 @@ const htmlCards = {
   income: document.getElementById('income-display'),
   expense: document.getElementById('expense-display'),
   total: document.getElementById('total-display'),
-  changeValueVisibility() {
-    this.expense.classList.remove('hidden');
-    this.total.classList.remove('hidden');
+  changeValueVisibility (condition) {
+    if(condition){
+      this.expense.classList.remove('hidden');
+      this.total.classList.remove('hidden');
+    }
   },
-  updateBalance() {
+  updateBalance () {
+    this.income.value = Utils.formatCurrency(Transaction.income());
     this.expense.innerText = Utils.formatCurrency(Transaction.expenses());
     this.total.innerText = Utils.formatCurrency(Transaction.total());
     Utils.changeBgColor(this.cardTotal, Transaction.total() > 0);
   },
-  updateIncomeValue() {
+  clearIncomeValue () {
+    this.income.addEventListener('click', e => e.target.value ='');
+  },
+  updateIncomeValue () {
     this.income.addEventListener('blur', function (e) {
       let digits = Utils.replaceToDigits(e.target.value);
       let total = parseInt(digits) - Transaction.expenses();
       htmlCards.income.value = Utils.formatCurrency(e.target.value);
       document.getElementById('total-display').innerHTML = Utils.formatCurrency(total);
       Utils.changeBgColor(htmlCards.cardTotal, total >= 0);
-      htmlCards.changeValueVisibility();
+      Storage.setIncomes(digits);
+      htmlCards.changeValueVisibility(true);
     });
   }
 }
 
 const htmlTableElement = {
   transactionsContainer: document.querySelector('#data-table tbody'),
-  addTransaction(transaction, index) {
+  addTransaction (transaction, index) {
     const tr = document.createElement('tr');
     tr.innerHTML = this.innerHTMLTransaction(transaction, index);
     tr.dataset.index = index;
     this.transactionsContainer.appendChild(tr);
   },
-  innerHTMLTransaction(transaction, index) {
+  innerHTMLTransaction (transaction, index) {
     const amount = Utils.formatCurrency(transaction.amount);
     return `
         <td class="description">${transaction.description}</td>
@@ -73,7 +93,7 @@ const htmlTableElement = {
         </td>
     `
   },
-  clearTransactions() {
+  clearTransactions () {
     this.transactionsContainer.innerHTML = "";
   }
 }
@@ -82,23 +102,23 @@ const Form = {
   description: document.querySelector('input#expense-description'),
   amount: document.querySelector('input#expense-amount'),
   date: document.querySelector('input#expense-date'),
-  getValues(){
+  getValues () {
     return {
       description: this.description.value,
       amount: this.amount.value,
       date: this.date.value
     }
   },
-  clearFields(){
+  clearFields () {
     this.description.value = '';
     this.amount.value = '';
     this.date.value = '';
   },
-  validateFields(){
+  validateFields () {
     const { description, amount, date } = this.getValues();
-    if(description.trim() === "" || amount.trim() === "" || date.trim() === "") throw new Error("Por favor, preencha todos os campos.");
+    if (description.trim() === "" || amount.trim() === "" || date.trim() === "") throw new Error("Por favor, preencha todos os campos.");
   },
-  formatValues(){
+  formatValues () {
     let { description, amount, date } = this.getValues();
     amount = Utils.formatAmount(amount);
     date = Utils.formatDate(date);
@@ -108,7 +128,7 @@ const Form = {
       date
     }
   },
-  submit(event){
+  submit (event) {
     try {
       event.preventDefault();
       this.validateFields();
@@ -117,7 +137,7 @@ const Form = {
       this.clearFields();
       Modal.activate();
       App.reload();
-    } catch(e) {
+    } catch (e) {
       const errorMessage = document.querySelector('#form-error');
       errorMessage.innerText = e.message;
       errorMessage.classList.remove('hidden');
@@ -126,20 +146,8 @@ const Form = {
   }
 }
 
-const Add = {
-  init(){
-    Transaction.all.forEach((transaction, index) => htmlTableElement.addTransaction(transaction, index));
-    htmlCards.updateIncomeValue();
-    htmlCards.updateBalance();
-  },
-  reload(){
-    htmlTableElement.clearTransactions();
-    Add.init();
-  }
-}
-
 const Utils = {
-  formatCurrency(value) {
+  formatCurrency (value) {
     let signal = "";
     if (value < 0) signal = "-";
     value = String(value).replace(/\D/g, "");
@@ -150,11 +158,11 @@ const Utils = {
     })
     return signal + value;
   },
-  formatAmount(value) {
+  formatAmount (value) {
     value = this.replaceToDigits(value);
     return Number(value);
   },
-  formatDate(value){
+  formatDate (value) {
     const splittedDate = value.split("-");
     return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`;
   },
@@ -162,8 +170,23 @@ const Utils = {
     if (condition) element.style.backgroundColor = 'var(--custom-green)';
     else element.style.backgroundColor = 'var(--custom-pink)';
   },
-  replaceToDigits(value){
+  replaceToDigits (value) {
     return value.replace(/\D/g, "");
+  }
+}
+
+const Add = {
+  init () {
+    Transaction.all.forEach((transaction, index) => htmlTableElement.addTransaction(transaction, index));
+    htmlCards.clearIncomeValue();
+    htmlCards.updateIncomeValue();
+    htmlCards.updateBalance();
+    Storage.setTransactions(Transaction.all);
+    htmlCards.changeValueVisibility(Storage.getTransactions().length > 0);
+  },
+  reload () {
+    htmlTableElement.clearTransactions();
+    Add.init();
   }
 }
 

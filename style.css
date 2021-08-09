@@ -12,6 +12,23 @@
   box-sizing: border-box;
 }
 
+*:before, *:after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  position: relative;
+}
+
+.main-container {
+  min-height: 100vh;
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-bottom: 100px;
+}
+
 html {
   font-size: 87.5%;
 }
@@ -20,8 +37,6 @@ body {
   background-color: var(--primary-light);
   font-family: 'Poppins', sans-serif;
   color: var(--primary-dark);
-  /* position: relative;
-  min-height: 100vh; */
 }
 
 .top-container {
@@ -179,6 +194,7 @@ button:hover {
   width: 150%;
   border-spacing: 0 .5rem;
   line-height: 1.1rem;
+  margin-bottom: 2rem;
 }
 
 table thead tr th:first-child, table tbody tr td:first-child {
@@ -281,8 +297,11 @@ td img {
 /*===== FOOTER =====*/
 
 footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   text-align: center;
-  padding: 4rem 0 1rem 0;
+  padding: 1rem 0;
 }
 
 /*===== RESPONSIVE =====*/
@@ -300,18 +319,12 @@ footer {
   #balance {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: .5rem;
   }
   table thead tr th:first-child, table tbody tr td:first-child {
     width: 50%;
   }
   #data-table {
     width: 100%;
-  }
-  footer {
-    position: absolute;
-    bottom: 1rem;
-    width: 100%;
-    text-align: center;
   }
 }

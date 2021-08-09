@@ -13,8 +13,8 @@
   <script src="./src/js/script.js" defer></script>
   <title>Minhas despesas recorrentes</title>
 </head>
-
 <body>
+  <div class="main-container">
   <header class="top-container">
     <div class="content container">
       <img src="/src/images/finance.svg" alt="Logo minhas despesas recorrentes">
@@ -26,11 +26,10 @@
       <h2 class="sr-only">Balanço</h2>
       <div class="card">
         <p class="content">
-          <span>Total entradas</span>
+          <span>Insira total de entradas</span>
           <img src="./src/images/income.svg" alt="Imagem de entradas">
         </p>
-        <input id="income-display" type="text" maxlength="10"
-          placeholder="R$ 0,00">
+        <input id="income-display" type="text" maxlength="10" placeholder="R$ 0,00">
       </div>
       <div class="card">
         <p class="content">
@@ -67,6 +66,17 @@
       </table>
     </section>
   </main>
+  <footer>
+    <nav>
+      <a href="https://github.com/grasielaGomes/todo-with-pomodoro" target="_blank" rel="noopener noreferrer">
+        <img src="src/images/github.svg" alt="Logo github" height="40px">
+      </a>
+      <a href="https://www.linkedin.com/in/grasisilva/" target="_blank" rel="noopener noreferrer">
+        <img src="src/images/linkedin.svg" alt="Logo linkedin" height="40px">
+      </a>
+    </nav>
+  </footer>
+  </div>
   <div class="modal-overlay">
     <div class="modal">
       <div id="form">
@@ -96,16 +106,5 @@
       </div>
     </div>
   </div>
-  <footer>
-    <nav>
-      <a href="https://github.com/grasielaGomes/todo-with-pomodoro" target="_blank" rel="noopener noreferrer">
-        <img src="src/images/github.svg" alt="Logo github" height="40px">
-      </a>
-      <a href="https://www.linkedin.com/in/grasisilva/" target="_blank" rel="noopener noreferrer">
-        <img src="src/images/linkedin.svg" alt="Logo linkedin" height="40px">
-      </a>
-    </nav>
-  </footer>
 </body>
-
 </html>
