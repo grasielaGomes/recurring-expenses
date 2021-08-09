@@ -4,35 +4,28 @@ const Modal = {
   }
 }
 
-const transactions = [
-  {
-    id: 1,
-    description: 'Internet',
-    amount: 50000,
-    date: '23/08/2021'
-  },
-  {
-    id: 2,
-    description: 'Netflix',
-    amount: 4000,
-    date: '23/08/2021'
-  }
-];
-
 const Transaction = {
-  all: transactions,
+  all: [
+    {
+      description: 'Internet',
+      amount: 50000,
+      date: '23/08/2021'
+    },
+    {
+      description: 'Netflix',
+      amount: 4000,
+      date: '23/08/2021'
+    }
+  ],
   income: document
     .getElementById('income-display'),
-  totalCard: document.querySelector('.total'),
-  getIncomeValue() {
-    Transaction.income.addEventListener('blur', function (e) {
-      let total = parseInt(e.target.value) - Transaction.expenses();
-      Transaction.income.value = Utils.formatCurrency(e.target.value);
-      document.getElementById('total-display').innerHTML = Utils.formatCurrency(total);
-      total < 0
-        ? Transaction.totalCard.style.backgroundColor = 'var(--custom-pink)'
-        : Transaction.totalCard.style.backgroundColor = 'var(--custom-green'
-    });
+  add(transaction) {
+    this.all.push(transaction);
+    Add.reload();
+  },
+  remove(index){
+    this.all.splice(index, 1);
+    App.reload();
   },
   expenses() {
     return this.all
@@ -42,8 +35,6 @@ const Transaction = {
     return this.income.value - this.expenses();
   }
 }
-
-Transaction.getIncomeValue();
 
 const Utils = {
   formatCurrency (value) {
@@ -56,6 +47,10 @@ const Utils = {
       currency: "BRL"
     })
     return signal + value;
+  },
+  changeBgColor (element, condition) {
+    if (condition) element.style.backgroundColor = 'var(--custom-green)';
+    else element.style.backgroundColor = 'var(--custom-pink)';
   }
 }
 
@@ -64,7 +59,7 @@ const htmlCards = {
   expense: document.getElementById('expense-display'),
   total: document.getElementById('total-display'),
   changeValueVisibility () {
-    if (transactions.length === 0) {
+    if (Transaction.all.length === 0) {
       this.expense.classList.toggle('hidden');
       this.total.classList.toggle('hidden');
     }
@@ -72,15 +67,18 @@ const htmlCards = {
   updateBalance () {
     this.expense.innerText = Utils.formatCurrency(Transaction.expenses());
     this.total.innerText = Utils.formatCurrency(Transaction.total());
-    Transaction.total() < 0
-      ? this.cardTotal.style.backgroundColor = 'var(--custom-pink)'
-      : this.cardTotal.style.backgroundColor = 'var(--custom-green'
+    Utils.changeBgColor(this.cardTotal, Transaction.total() > 0);
+  },
+  getIncomeValue() {
+    Transaction.income.addEventListener('blur', function (e) {
+      let digits = e.target.value.replace(/\D/g, "");
+      let total = parseInt(digits) - Transaction.expenses();
+      Transaction.income.value = Utils.formatCurrency(e.target.value);
+      document.getElementById('total-display').innerHTML = Utils.formatCurrency(total);
+      Utils.changeBgColor(htmlCards.cardTotal, total >= 0);
+    });
   }
 }
-
-htmlCards.updateBalance();
-htmlCards.changeValueVisibility();
-
 
 const htmlTableElement = {
   transactionsContainer: document.querySelector('#data-table tbody'),
@@ -99,9 +97,45 @@ const htmlTableElement = {
           <img src="./src/images/minus.svg" alt="Remover despesa">
         </td>
     `
+  },
+  clearTransactions() {
+    this.transactionsContainer.innerHTML = "";
   }
 }
 
+const Form = {
+  description: document.querySelector('input#expense-description'),
+  amount: document.querySelector('input#expense-amount'),
+  date: document.querySelector('input#expense-date'),
+  validateFields(){},
+  formatData(){},
+  submit(event){
+    event.preventDefault();
+    this.validateFields();
+    this.formatData();
+  }
+}
+
+const Add = {
+  init(){
+    Transaction.all.forEach(t => htmlTableElement.addTransaction(t));
+    htmlCards.updateBalance();
+    htmlCards.changeValueVisibility();
+    htmlCards.getIncomeValue();
+  },
+  reload(){
+    htmlTableElement.clearTransactions();
+    Add.init();
+  }
+}
+
+Add.init();
+
+Transaction.add({
+  description: 'TV a cabo',
+  amount: 53000,
+  date: '23/08/2021'
+});
 
 
-transactions.forEach(t => htmlTableElement.addTransaction(t));
+
