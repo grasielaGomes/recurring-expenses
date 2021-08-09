@@ -13,7 +13,7 @@ const Transaction = {
   },
   remove(index){
     this.all.splice(index, 1);
-    App.reload();
+    Add.reload();
   },
   income() {
     return document
@@ -56,19 +56,20 @@ const htmlCards = {
 
 const htmlTableElement = {
   transactionsContainer: document.querySelector('#data-table tbody'),
-  addTransaction (transaction, index) {
+  addTransaction(transaction, index) {
     const tr = document.createElement('tr');
-    tr.innerHTML = this.innerHTMLTransaction(transaction);
+    tr.innerHTML = this.innerHTMLTransaction(transaction, index);
+    tr.dataset.index = index;
     this.transactionsContainer.appendChild(tr);
   },
-  innerHTMLTransaction (transaction) {
+  innerHTMLTransaction(transaction, index) {
     const amount = Utils.formatCurrency(transaction.amount);
     return `
         <td class="description">${transaction.description}</td>
         <td class="expense">${amount}</td>
         <td class="date">${transaction.date}</td>
         <td>
-          <img src="./src/images/minus.svg" alt="Remover despesa">
+          <img onclick="Transaction.remove(${index})" src="./src/images/minus.svg" alt="Remover despesa">
         </td>
     `
   },
@@ -127,7 +128,7 @@ const Form = {
 
 const Add = {
   init(){
-    Transaction.all.forEach(t => htmlTableElement.addTransaction(t));
+    Transaction.all.forEach((transaction, index) => htmlTableElement.addTransaction(transaction, index));
     htmlCards.updateIncomeValue();
     htmlCards.updateBalance();
   },
@@ -165,7 +166,6 @@ const Utils = {
     return value.replace(/\D/g, "");
   }
 }
-
 
 Add.init();
 
