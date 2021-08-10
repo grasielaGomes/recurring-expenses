@@ -1,6 +1,5 @@
 # Despesas Recorrentes | Project
-![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)(https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)(https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-[![NPM](https://img.shields.io/npm/l/react)](https://github.com/grasielaGomes/todo-with-pomodoro/blob/master/LICENSE)
+![https://grasielagomes.github.io/recurring-expenses/](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) ![JS](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
 
 # Sobre o projeto
@@ -12,7 +11,7 @@ Despesas Recorrentes é uma webpage em HTML, CSS e JavaScript vanilla adaptada a
 O projeto consiste em uma página web onde é possível criar uma lista de despesas recorrentes e visualizar o total de entradas, saídas e o balanço do mês.
 
 ## Layout web
-![Web 1](https://github.com/grasielaGomes/todo-with-pomodoro/blob/4d853668029a82c27304e5be27829c8d9e171191/img/main.png)
+![Web 1]()
 
 # Tecnologias utilizadas
 ## Frontend
@@ -31,5 +30,5 @@ O projeto consiste em uma página web onde é possível criar uma lista de despe
 Grasiela Gomes
 
 ![Linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)
-https://www.linkedin.com/in/grasisilva/
 
+https://www.linkedin.com/in/grasisilva/
