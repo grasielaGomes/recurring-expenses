@@ -12,7 +12,10 @@ Despesas Recorrentes é uma webpage em HTML, CSS e JavaScript vanilla adaptada a
 O projeto consiste em uma página web onde é possível criar uma lista de despesas recorrentes e visualizar o total de entradas, saídas e o balanço do mês.
 
 ## Layout web
-![Web 1]()
+![Web](https://github.com/grasielaGomes/recurring-expenses/blob/main/src/images/main.jpg?raw=true)
+
+## Layout mobile
+![Mobile](https://github.com/grasielaGomes/recurring-expenses/blob/main/src/images/mobile.jpg?raw=true)
 
 # Tecnologias utilizadas
 ## Frontend
