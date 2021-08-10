@@ -254,7 +254,7 @@ td img {
 
 .modal {
   background-color: var(--primary-light);
-  padding: 3rem 4rem;
+  padding: 2rem;
   position: relative;
   border-radius: .2rem;
   width: 90%;
@@ -326,5 +326,8 @@ footer {
   }
   #data-table {
     width: 100%;
+  }
+  .modal {
+    padding: 3rem 4rem;
   }
 }
