@@ -158,13 +158,18 @@ const Utils = {
     })
     return signal + value;
   },
+  addZero (num) {
+    return num >= 10 ? num : `0${num}`;
+  },
   formatAmount (value) {
     value = this.replaceToDigits(value);
     return Number(value);
   },
   formatDate (value) {
+    const localDate = new Date();
+    const month = this.addZero(localDate.getMonth() + 1);
     const splittedDate = value.split("-");
-    return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`;
+    return `${splittedDate[2]}/${month}/${localDate.getFullYear()}`;
   },
   changeBgColor (element, condition) {
     if (condition) element.style.backgroundColor = 'var(--custom-green)';
