@@ -30,7 +30,7 @@ const Transaction = {
     Add.reload();
   },
   income () {
-    return document.getElementById('income-display').value;
+    return Storage.getIncomes();
   },
   expenses () {
     return this.all
