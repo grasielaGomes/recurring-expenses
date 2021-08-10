@@ -168,8 +168,7 @@ const Utils = {
   formatDate (value) {
     const localDate = new Date();
     const month = this.addZero(localDate.getMonth() + 1);
-    const splittedDate = value.split("-");
-    return `${splittedDate[2]}/${month}/${localDate.getFullYear()}`;
+    return `${value}/${month}/${localDate.getFullYear()}`;
   },
   changeBgColor (element, condition) {
     if (condition) element.style.backgroundColor = 'var(--custom-green)';
