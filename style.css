@@ -275,11 +275,18 @@ td img {
   width: 100%;
 }
 
+input.update {
+  border: 1px solid var(--custom-grey);
+  border-radius: .2rem;
+  padding: .6rem .7rem;
+  background-color: var(--primary-light);
+}
+
 .input-group {
   margin-top: 1rem;
 }
 
-.input-group small {
+.input-group small, small {
   opacity: .4;
 }
 

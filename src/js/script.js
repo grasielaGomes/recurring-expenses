@@ -85,9 +85,9 @@ const htmlTableElement = {
   innerHTMLTransaction (transaction, index) {
     const amount = Utils.formatCurrency(transaction.amount);
     return `
-        <td class="description">${transaction.description}</td>
-        <td class="expense">${amount}</td>
-        <td class="date">${transaction.date}</td>
+        <td class="description" onclick="htmlTableElement.editDescription(event)">${transaction.description}</td>
+        <td class="expense" onclick="htmlTableElement.editAmount(event)">${amount}</td>
+        <td class="date" onclick="htmlTableElement.editDate(event)">${transaction.date}</td>
         <td>
           <img onclick="Transaction.remove(${index})" src="./src/images/minus.svg" alt="Remover despesa">
         </td>
@@ -95,6 +95,59 @@ const htmlTableElement = {
   },
   clearTransactions () {
     this.transactionsContainer.innerHTML = "";
+  },
+  editDescription (event) {
+    const value = event.target.innerText;
+    try {
+      event.target.innerHTML = `<input type="text" id="expense-description" class="update" name="expense-description" onblur="htmlTableElement.updateDescription(event)" autofocus>`;
+      event.target.firstChild.value = value;
+    } catch (e) {
+      console.log(e);
+    }
+  },
+  editAmount (event) {
+    const value = event.target.innerText;
+    try {
+      event.target.innerHTML = `<input type="text" id="expense-amount" class="update" name="expense-amount" placeholder="0,00" maxlength="10" onblur="htmlTableElement.updateAmount(event)" autofocus>`;
+      event.target.firstChild.value = value;
+    } catch(e){
+      console.log(e);
+    }
+  },
+  editDate (event) {
+    const value = event.target.innerText.split('/');
+    try {
+      event.target.innerHTML = `<input type="text" id="expense-date" class="update" name="expense-date" placeholder="01" maxlength="2" onblur="htmlTableElement.updateDate(event)" autofocus>`;
+      event.target.firstChild.value = value[0];
+    } catch(e){
+      console.log(e);
+    }
+  },
+  updateDescription (event) {
+    if (event.target.value) {
+      const index = event.target.parentElement.parentElement.dataset.index
+      Transaction.all[index].description = event.target.value;
+      event.target.parentElement.innerHTML = `<td class="description" onclick="htmlTableElement.editDescription(event)">${event.target.value}</td>`;
+    }
+    Storage.setTransactions(Transaction.all);
+  },
+  updateAmount (event) {
+    if (event.target.value) {
+      const index = event.target.parentElement.parentElement.dataset.index
+      Transaction.all[index].amount = Utils.formatAmount(event.target.value);
+      event.target.parentElement.innerHTML = `<td class="expense" onclick="htmlTableElement.editAmount(event)">${Utils.formatCurrency(event.target.value)}</td>`;
+    }
+    Storage.setTransactions(Transaction.all);
+    htmlCards.updateBalance();
+  },
+  updateDate (event) {
+    if (event.target.value) {
+      const index = event.target.parentElement.parentElement.dataset.index
+      Transaction.all[index].date = Utils.formatDate(event.target.value);
+      event.target.parentElement.innerHTML = `<td class="date" onclick="htmlTableElement.editDate(event)">${Utils.formatDate(event.target.value)}</td>`;
+    }
+    console.log(event.target.innerHTML);
+    Storage.setTransactions(Transaction.all);
   }
 }
 
@@ -168,7 +221,8 @@ const Utils = {
   formatDate (value) {
     const localDate = new Date();
     const month = this.addZero(localDate.getMonth() + 1);
-    return `${value}/${month}/${localDate.getFullYear()}`;
+    if(value > 0 && value <= 31) return `${value}/${month}/${localDate.getFullYear()}`;
+    else return `01/${month}/${localDate.getFullYear()}`;
   },
   changeBgColor (element, condition) {
     if (condition) element.style.backgroundColor = 'var(--custom-green)';
