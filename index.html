@@ -95,7 +95,7 @@
           </div>
           <div class="input-group">
             <label for="expense-date" class="sr-only">Vencimento</label>
-            <input type="text" id="expense-date" name="expense-date" placeholder="01" maxlength="2" pattern="[0-3]{2}">
+            <input type="text" id="expense-date" name="expense-date" placeholder="01" maxlength="2" pattern="^([1-9]|[12][0-9]|3[01])$">
             <small class="help">Dia do vencimento</small>
           </div>
           <p class="hidden" id="form-error">Error message</p>
