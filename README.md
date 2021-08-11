@@ -27,7 +27,8 @@ O projeto consiste em uma página web onde é possível criar uma lista de despe
 - Mobile first
 - Rodapé com posição absoluta no final da página
 - Formatação por expressão regular
-- Inserção de valor de input de texto sem submit
+- Edição de valor de input de texto sem submit
+- Ordenamento das despesas por descrição, valor ou data
 - Inclusão de despesas por modal
 - Alteração de cores de acordo com o balanço positivo ou negativo
 
