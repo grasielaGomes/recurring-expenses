@@ -7,7 +7,7 @@
 
 https://grasielagomes.github.io/recurring-expenses/
 
-Despesas Recorrentes é uma webpage em HTML, CSS e JavaScript vanilla adaptada a partir do projeto DevFinances desensolvido pela [RockeSeat](https://rocketseat.com.br/discover).
+Despesas Recorrentes é uma webpage em HTML, CSS e JavaScript vanilla adaptada a partir do projeto DevFinances desenvolvido pela [RockeSeat](https://rocketseat.com.br/discover).
 
 O projeto consiste em uma página web onde é possível criar uma lista de despesas recorrentes e visualizar o total de entradas, saídas e o balanço do mês.
 
