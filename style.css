@@ -197,6 +197,10 @@ button:hover {
   margin-bottom: 2rem;
 }
 
+#description, #amount, #date {
+  cursor: pointer;
+}
+
 table thead tr th:first-child, table tbody tr td:first-child {
   border-radius: .25rem 0 0 .25rem;
   width: 40%;

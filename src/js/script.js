@@ -75,7 +75,22 @@ const htmlCards = {
 }
 
 const htmlTableElement = {
+  labelsContainer: document.querySelector('#data-table thead'),
   transactionsContainer: document.querySelector('#data-table tbody'),
+  sortTransaction () {
+    this.labelsContainer.addEventListener('click', (e) => {
+      if(e.target.id === 'amount') Transaction.all.sort((a, b) => a[e.target.id] - b[e.target.id]);
+      if (e.target.id === 'date') Transaction.all.sort((a, b) => a[e.target.id].split('/')[0] - b[e.target.id].split('/')[0]);
+      if (e.target.id === 'description') Transaction.all.sort((a, b) => {
+        if (a[e.target.id] > b[e.target.id]) return 1;
+        if (a[e.target.id] < b[e.target.id]) return -1;
+        return 0;
+      });
+      Storage.setTransactions(Transaction.all);
+      htmlTableElement.clearTransactions();
+      Transaction.all.forEach((transaction, index) => htmlTableElement.addTransaction(transaction, index));
+    });
+  },
   addTransaction (transaction, index) {
     const tr = document.createElement('tr');
     tr.innerHTML = this.innerHTMLTransaction(transaction, index);
@@ -146,7 +161,6 @@ const htmlTableElement = {
       Transaction.all[index].date = Utils.formatDate(event.target.value);
       event.target.parentElement.innerHTML = `<td class="date" onclick="htmlTableElement.editDate(event)">${Utils.formatDate(event.target.value)}</td>`;
     }
-    console.log(event.target.innerHTML);
     Storage.setTransactions(Transaction.all);
   }
 }
@@ -242,6 +256,7 @@ const Add = {
     Storage.setTransactions(Transaction.all);
     htmlCards.changeValueVisibility(Storage.getTransactions().length > 0);
     if (Transaction.all.length > 0) document.querySelector('.edit').classList.toggle('hidden');
+    htmlTableElement.sortTransaction();
   },
   reload () {
     htmlTableElement.clearTransactions();
