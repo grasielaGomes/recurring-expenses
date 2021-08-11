@@ -241,6 +241,7 @@ const Add = {
     htmlCards.updateBalance();
     Storage.setTransactions(Transaction.all);
     htmlCards.changeValueVisibility(Storage.getTransactions().length > 0);
+    if (Transaction.all.length > 0) document.querySelector('.edit').classList.toggle('hidden');
   },
   reload () {
     htmlTableElement.clearTransactions();
